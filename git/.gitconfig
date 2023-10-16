@@ -1,0 +1,20 @@
+[includeIf "gitdir:~/fun/"]
+	path = ~/.gitconfig_fun
+[includeIf "gitdir:~/org/"]
+	path = ~/.gitconfig_fun
+[includeIf "gitdir:~/work/"]
+	path = ~/.gitconfig_work
+
+[commit]
+	gpgsign = true
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[core]
+	editor = emacs -nw
+
+[gpg]
+	program = gpg

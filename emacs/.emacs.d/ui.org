@@ -1,0 +1,34 @@
+#+TITLE: ui.org
+#+AUTHOR: Kazuaki Ishiguro
+#+EMAIL: kazuakiishiguro@protonmail.com
+#+STARTUP: overview
+
+* Ui settings
+** Mode line
+#+begin_src emacs-lisp
+  (setq column-number-mode t)
+#+end_src
+** No toolbar, menu-bar nor scroll-bar
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+
+  (when window-system
+    (scroll-bar-mode -1))
+#+end_src
+** Line numbers
+*** Line numbers
+https://github.com/kisswiki/kisswiki/blob/master/src/code_editors/emacs/line-numbers.md
+#+begin_src emacs-lisp
+  (defun my/init-line-numbers-mode()
+    "Initialize line numbers mode."
+    (display-line-numbers-mode)
+    (setq display-line-numbers-with-start t))
+
+  (add-hook 'prog-mode-hook 'my/init-line-numbers-mode)
+#+end_src
+*** Hi-light line
+#+begin_src emacs-lisp
+  (custom-set-faces
+   '(line-number-current-line ((t (:foreground "Royalblue" :background "DarkGray")))))
+#+end_src

@@ -1,0 +1,30 @@
+#+TITLE: org.org
+#+AUTHOR: Kazuaki Ishiguro
+#+EMAIL: kazuakiishiguro@protonmail.com
+#+STARTUP: overview
+
+* Org-Babel
+** Load babel languages
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (emacs-lisp . t)
+     (shell . t)
+     (rust . t)
+     (js . t)
+     (latex . t)
+     (python . t)
+     (scheme .t)))
+#+end_src
+** Org-Tempo
+#+begin_src emacs-lisp
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("s" . "src"))
+  (add-to-list 'org-structure-template-alist '("kr" . "src C"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("rs" . "src rust"))
+  (add-to-list 'org-structure-template-alist '("sc" . "src scheme"))
+  (add-to-list 'org-structure-template-alist '("tex" . "src latex"))
+#+end_src

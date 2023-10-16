@@ -1,0 +1,48 @@
+#+TITLE: My Personal Emacs Configuration
+#+AUTHOR: Kazuaki Ishiguro
+#+EMAIL: kzuakiishiguro@protonmail.com
+#+STARTUP: overview
+
+* Baic Config
+#+begin_src emacs-lisp
+  (eval-when-compile
+    (require 'use-package))
+#+end_src
+** Always =:ensure t=
+#+begin_src emacs-lisp
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+#+end_src
+* Load =env.el=
+#+begin_src emacs-lisp
+  (if (file-exists-p "~/.emacs.d/.env.el")
+      (load "~/.emacs.d/.env.el"))
+#+end_src
+* Load Configs
+** Loading Function
+#+begin_src emacs-lisp
+  (defun load-config (file)
+    (org-babel-load-file
+     (expand-file-name
+      (concat user-emacs-directory file))))
+#+end_src
+** General
+#+begin_src emacs-lisp
+  (load-config "general.org")
+#+end_src
+** Programming
+#+begin_src emacs-lisp
+  (load-config "programming.org")
+#+end_src
+** Language
+#+begin_src emacs-lisp
+  (load-config "lang.org")
+#+end_src
+** Ui
+#+begin_src emacs-lisp
+  (load-config "ui.org")
+#+end_src
+** Org mode
+#+begin_src emacs-lisp
+  (load-config "org.org")
+#+end_src

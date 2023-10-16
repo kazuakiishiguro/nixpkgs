@@ -1,0 +1,87 @@
+#+TITLE: general.org
+#+AUTHOR: Kazuaki Ishiguro
+#+EMAIL: kazuakiishiguro@protonmail.com
+#+STARTUP: overview
+
+* Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :if (executable-find "git")
+    :bind ("C-x g" . magit-status))
+#+end_src
+* Util
+** No backup, auto-save
+#+begin_src emacs-lisp
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+#+end_src
+** Editor setting
+*** Edit
+#+begin_src emacs-lisp
+  (defun my/visit-emacs-config ()
+    (interactive)
+    (find-file "~/.emacs.d"))
+
+  (global-set-key (kbd "C-c f .") 'my/visit-emacs-config)
+#+end_src
+*** Reload
+#+begin_src emacs-lisp
+  (defun my/reload-emacs-config ()
+    (interactive)
+    (load-file "~/.emacs.d/init.el"))
+
+  (global-set-key (kbd "C-c f r") 'my/reload-emacs-config)
+#+end_src
+** Always kill current buffer
+#+begin_src emacs-lisp
+  (defun volatile-kill-buffer ()
+    "Kill current buffer unconditionally."
+    (interactive)
+    (let ((buffer-modified-p nil))
+      (kill-buffer (current-buffer))))
+
+  (global-set-key (kbd "C-x k") 'volatile-kill-buffer)     ;; Unconditionally kill unmodified buffers.
+#+end_src
+** Delete other windows setting
+#+begin_src emacs-lisp
+  (defun my/kill-another-buffer ()
+    "Kill another buffer if it exists."
+    (interactive)
+    (delete-other-windows))
+
+  (global-set-key (kbd "C-q") 'my/kill-another-buffer)
+#+end_src
+** Insert line before
+#+begin_src emacs-lisp
+  (defun my/insert-line-before ()
+    "Insert a newline(s) above the line containing the cursor."
+    (interactive)
+    (save-excursion
+      (move-beginning-of-line 1)
+      (newline)))
+
+  (global-set-key (kbd "C-o") 'my/insert-line-before)
+#+end_src
+** y-or-n
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+** No redo
+#+begin_src emacs-lisp
+  (setq undo-no-redo t)
+#+end_src
+** Disable visual bell
+#+begin_src emacs-lisp
+  (setq rign-bell-function 'ignore)
+#+end_src
+** Trim trailing whitespace
+#+begin_src emacs-lisp
+  (use-package ws-butler
+    :diminish ws-butler-mode
+    :config
+    (ws-butler-global-mode))
+#+end_src
+** Start eshell
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x t") 'eshell)
+#+end_src
