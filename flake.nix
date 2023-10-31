@@ -11,41 +11,45 @@
       system:
         let inherit (nixpkgs.lib) optional;
             pkgs = import nixpkgs { inherit system; };
+
+            editorPackages = with pkgs; [
+              emacs29
+              screen
+            ];
+
+            utilPackages = with pkgs; [
+              bat
+              bash
+              curl
+              fzf
+              htop
+              gnupg
+              jq
+              mosh
+              screen
+              stow
+              tree
+              wget
+              zsh
+            ];
+
+            programmingPackages = with pkgs; [
+              cargo
+              rust-analyzer
+            ];
+
+            allPackages = editorPackages ++ utilPackages ++ programmingPackages;
+
+            # Function to create the shellHook command
+            mkShellHook = stowTargets: ''
+              ${builtins.concatStringsSep "\n" (map (target: "stow -t ~ -v ${target}") stowTargets)}
+            '';
+
         in
           {
             devShell = pkgs.mkShell {
-              buildInputs = with pkgs; [
-                # editor
-                emacs29
-                screen
-
-                # util
-                bat
-                bash
-                curl
-                fzf
-                htop
-                gnupg
-                jq
-                mosh
-                screen
-                stow
-                tree
-                wget
-                zsh
-
-                # programming
-                cargo
-                rust-analyzer
-              ];
-
-              # TODO: Any better ways?
-              shellHook = ''
-                stow -t ~ -v config
-                stow -t ~ -v emacs
-                stow -t ~ -v git
-                stow -t ~ -v zsh
-              '';
+              buildInputs = allPackages;
+              shellHook = mkShellHook ["config" "emacs" "git" "zsh"];
             };
           }
       );
