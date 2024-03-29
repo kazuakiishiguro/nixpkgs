@@ -1,3 +1,5 @@
+PROFILE=/nix/var/nix/profiles/system
+
 all: build
 
 build:
@@ -10,6 +12,9 @@ dev:
 
 clean:
 	nix-collect-garbage -d
+
+delete:
+	sudo nix-env --delete-generations --profile ${PROFILE} old
 
 update:
 	nix flake update
