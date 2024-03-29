@@ -8,14 +8,25 @@
   
   home.packages = with pkgs; [
     bat
+    curl
+    htop
+    wget
   ];
 
   programs.bash = {
     enable = true;
-    enableCompletion = true;
-    shellAliases= {
+    shellAliases = {
+      ll = "ls -la";
       emacs = "emacs -nw";
     };
+  };
+
+  programs.emacs = {
+    enable = true;
+    extraPackages = epkgs: with epkgs; [
+      magit
+      nix-mode
+    ];
   };
 
   programs.firefox = {

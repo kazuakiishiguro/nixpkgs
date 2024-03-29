@@ -119,10 +119,6 @@
   };
 
   services = {
-    emacs = {
-      enable = true;
-      package = pkgs.emacs;
-    };
     fwupd.enable = true;
     pcscd.enable = true;
     tailscale.enable = true;    
