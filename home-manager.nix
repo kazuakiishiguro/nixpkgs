@@ -10,6 +10,29 @@
     bat
   ];
 
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    shellAliases= {
+      emacs = "emacs -nw";
+    };
+  };
+
+  programs.firefox = {
+    enable = true;
+    profiles.kishiguro = {
+      isDefault = true;
+      settings = {
+        "browser.startup.homepage" = "about:blank";
+      };
+    };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "Kazuaki Ishiguro";

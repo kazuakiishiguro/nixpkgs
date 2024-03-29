@@ -110,9 +110,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment = {
-    systemPackages = with pkgs; [
-      firefox
-    ];
+    systemPackages = with pkgs; [];
   };
   
   programs.gnupg.agent = {
