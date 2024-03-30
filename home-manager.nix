@@ -202,6 +202,32 @@
     '';
   };
 
+  programs.i3status = {
+    enable = true;
+    enableDefault = false;
+    modules = {
+      "wireless _first_" = {
+        position = 1;
+        settings = {
+          format_up = "W: %essid";
+          format_down = "W: donw";
+        };
+      };
+      "battery all" = {
+        position = 2;
+        settings = {
+          format = "%status %percentage";
+        };
+      };
+      "tztime local" = {
+        position = 3;
+        settings = {
+          format = "%m/%d %H:%M";
+        };
+      };
+    };
+  };
+
   programs.bash = {
     enable = true;
     shellAliases = {
