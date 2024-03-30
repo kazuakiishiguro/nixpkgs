@@ -47,9 +47,11 @@
       exec --no-startup-id nm-applet
 
       # Use pactl to adjust volume in PulseAudio.
-      bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-      bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-      bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+      set $refresh_i3status killall -SIGUSR1 i3status
+      bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+      bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+      bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+      bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
       # Use Mouse+$mod to drag floating windows to their wanted position
       floating_modifier $mod
@@ -206,21 +208,27 @@
     enable = true;
     enableDefault = false;
     modules = {
-      "wireless _first_" = {
+      "volume master" = {
         position = 1;
+        settings = {
+          device = "pulse";
+        };
+      };
+      "wireless _first_" = {
+        position = 2;
         settings = {
           format_up = "W: %essid";
           format_down = "W: donw";
         };
       };
       "battery all" = {
-        position = 2;
+        position = 3;
         settings = {
           format = "%status %percentage";
         };
       };
       "tztime local" = {
-        position = 3;
+        position = 4;
         settings = {
           format = "%m/%d %H:%M";
         };
