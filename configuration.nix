@@ -15,7 +15,11 @@
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Tokyo";
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
+  };
   
   services = {
     xserver = {
