@@ -100,7 +100,8 @@
       age-plugin-yubikey
       passage
       syncthing
-      wget      
+      wget
+      xsel
     ];
   };
 
