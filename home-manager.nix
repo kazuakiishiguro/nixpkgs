@@ -258,6 +258,7 @@
       isDefault = true;
       settings = {
         "browser.startup.homepage" = "about:blank";
+        "browser.toolbars.bookmarks.visibility" = "never";
       };
     };
   };
