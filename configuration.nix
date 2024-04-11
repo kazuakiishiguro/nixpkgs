@@ -23,9 +23,9 @@
   
   services = {
     desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;    
     xserver = {
       enable = true;
-      displayManager.sddm.enable = true;
       xkb = {
         layout = "us";
         variant = "";
@@ -91,6 +91,7 @@
       syncthing
       wget
       xsel
+      zoom-us
     ];
   };
 
