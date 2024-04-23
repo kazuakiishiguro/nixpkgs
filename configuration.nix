@@ -1,7 +1,7 @@
 { inputs, pkgs,... }:{
   imports =
     [
-     ./hardware-configuration.nix
+      ./hardware-configuration.nix
     ]
     ++ [
       inputs.xremap.nixosModules.default
@@ -9,12 +9,12 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-    
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Tokyo";
   sound.enable = true;
-  
+
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
@@ -66,7 +66,7 @@
       serif = ["Noto Serif CJK JP"];
       sansSerif = ["Noto Sans CJK JP"];
     };
-  };  
+  };
   
   nix = {
     settings = {
@@ -117,11 +117,11 @@
     config = {
       modmap = [
         {
-	  name = "No CapsLock";
-	  remap = {
-	    CapsLock = "Ctrl_L";
-	  };
-	}
+	        name = "No CapsLock";
+	        remap = {
+	          CapsLock = "Ctrl_L";
+	        };
+	      }
       ];
     };
   };  
