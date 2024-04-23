@@ -9,7 +9,6 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-1e3fdc47-577a-45ed-b3d9-f70e8b06f53a".device = "/dev/disk/by-uuid/1e3fdc47-577a-45ed-b3d9-f70e8b06f53a";
     
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -22,10 +21,10 @@
   };
   
   services = {
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;    
     xserver = {
       enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
       xkb = {
         layout = "us";
         variant = "";
@@ -65,7 +64,7 @@
     ];
     fontconfig.defaultFonts = {
       serif = ["Noto Serif CJK JP"];
-	    sansSerif = ["Noto Sans CJK JP"];
+      sansSerif = ["Noto Sans CJK JP"];
     };
   };  
   
@@ -118,11 +117,11 @@
     config = {
       modmap = [
         {
-	        name = "No CapsLock";
-	        remap = {
-	          CapsLock = "Ctrl_L";
-	        };
-	      }        
+	  name = "No CapsLock";
+	  remap = {
+	    CapsLock = "Ctrl_L";
+	  };
+	}
       ];
     };
   };  
