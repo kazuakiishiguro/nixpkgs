@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   home = rec {
     username="kishiguro";
     homeDirectory = "/home/${username}";
@@ -51,6 +51,12 @@
     };
     extraConfig = {
       github.user = "kazuakiishiguro";
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      scaling-factor = lib.hm.gvariant.mkUint32 2;
     };
   };
 }
