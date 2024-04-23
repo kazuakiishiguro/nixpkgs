@@ -55,8 +55,8 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      scaling-factor = lib.hm.gvariant.mkUint32 2;
+    "org/gnome/mutter" = {
+      experimental-features = [ "scale-monitor-framebuffer" ];
     };
   };
 }
