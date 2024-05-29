@@ -23,17 +23,29 @@
   services = {
     xserver = {
       enable = true;
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
+      windowManager.dwm.enable = true;
+      displayManager.sessionCommands = ''
+            xsetroot -solid  "#000000" &
+            picom &
+            slstatus &
+            export XIM="ibus"
+            export GTK_IM_MODULE="ibus"
+            export QT_IM_MODULE="xim"
+            export XMODIFIERS="@im=ibus"
+            ibus-daemon -d -x &
+            export XSESSION_PID="$$"
+            exec dwm > ~/.dwm.log
+      '';
       xkb = {
         layout = "us";
         variant = "";
       };
-      libinput.touchpad = {
-        clickMethod = "clickfinger";
-        naturalScrolling = true;
-        tapping = false;
-      };
+    };
+    displayManager.defaultSession = "none+dwm";
+    libinput.touchpad = {
+      clickMethod = "clickfinger";
+      naturalScrolling = true;
+      tapping = false;
     };
     printing.enable = true;
   };
@@ -94,10 +106,40 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+    overlays = [
+      (final: prev: {
+        dwm = prev.dwm.overrideAttrs (old: {
+          src = /home/kishiguro/fun/suckless/dwm;
+          patches = [
+            /home/kishiguro/fun/suckless/dwm/patches/dwm-center-6.2.diff
+            /home/kishiguro/fun/suckless/dwm/patches/dwm-hide_vacant_tags-6.3.diff
+          ];
+        });
+      })
+    ];
+  };
 
   environment = {
-    systemPackages = with pkgs; [];
+    systemPackages = with pkgs; [
+      picom
+      xorg.libX11
+      (dmenu.overrideAttrs {
+        src = /home/kishiguro/fun/suckless/dmenu;
+      })
+      (slstatus.overrideAttrs {
+        src = /home/kishiguro/fun/suckless/slstatus;
+      })
+      (st.overrideAttrs {
+        src = /home/kishiguro/fun/suckless/st;
+        patches = [
+          /home/kishiguro/fun/suckless/st/patches/st-scrollback-0.8.5.diff
+        ];
+      })
+    ];
   };
   
   programs.gnupg.agent = {
