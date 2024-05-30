@@ -26,7 +26,6 @@
       windowManager.dwm.enable = true;
       displayManager.sessionCommands = ''
             xsetroot -solid  "#000000" &
-            picom &
             slstatus &
             export XIM="ibus"
             export GTK_IM_MODULE="ibus"
@@ -125,7 +124,6 @@
 
   environment = {
     systemPackages = with pkgs; [
-      picom
       xorg.libX11
       (dmenu.overrideAttrs {
         src = /home/kishiguro/fun/suckless/dmenu;
