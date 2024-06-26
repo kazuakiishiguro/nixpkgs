@@ -2,16 +2,22 @@
   home = rec {
     username="kishiguro";
     homeDirectory = "/home/${username}";
-    stateVersion = "23.11";
+    stateVersion = "24.11";
   };
   programs.home-manager.enable = true;
   
   home.packages = with pkgs; [
+    age-plugin-yubikey
     bat
     curl
-    mosh
     htop
+    mosh
+    passage
+    signal-desktop
+    syncthing    
     wget
+    xsel
+    zoom-us    
   ];
 
   programs.bash = {

@@ -95,14 +95,7 @@
     isNormalUser = true;
     description = "kishiguro";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      age-plugin-yubikey
-      passage
-      syncthing
-      wget
-      xsel
-      zoom-us
-    ];
+    packages = with pkgs; [];
   };
 
   nixpkgs = {
@@ -165,6 +158,5 @@
       ];
     };
   };  
-  
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }
